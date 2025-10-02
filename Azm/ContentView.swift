@@ -11,9 +11,10 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // Background
-            Image("Image 7")
+            Image("Image 12")
                 .ignoresSafeArea()
             
+
             VStack(spacing: 40) {
                 // Title text
                 Text("\(Int(currentDistance)) / \(Int(totalDistance)) يوم")
@@ -25,13 +26,13 @@ struct ContentView: View {
                 ZStack {
                     // Background circle
                     Circle()
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 15)
+                        .stroke(Color.white.opacity(0.3), lineWidth: 15)
                         .frame(width: 200, height: 200)
                     
                     // Progress circle
                     Circle()
                         .trim(from: 0, to: progress)
-                        .stroke(Color.white, style: StrokeStyle(lineWidth: 15, lineCap: .round))
+                        .stroke(Color.yellow, style: StrokeStyle(lineWidth: 15, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                         .frame(width: 200, height: 200)
                         .animation(.easeInOut(duration: 1), value: progress)
