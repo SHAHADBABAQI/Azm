@@ -19,7 +19,7 @@ struct ContentView: View {
                 // Title text
                 Text("\(Int(currentDistance)) / \(Int(totalDistance)) يوم")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .font(.system(size: 20, weight: .bold, design: .default))
                 
                 // Circular progress with camel
