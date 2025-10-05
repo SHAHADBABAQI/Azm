@@ -19,10 +19,12 @@ struct ContentView2: View {
                 .bold()
                 .font(.title)
                 .padding(.top, -300)
+                .font(.custom("SF Arabic Round", size: 36))
+
             
             //الزر الاول حق الشهر
-            Button("شهر") {
-                print("شهر")
+            Button("٣٠ يوم") {
+                print("٣٠ يوم")
             }
             .padding()
             .frame(width: 263)
@@ -30,10 +32,11 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -150)
+            .font(.custom("SF Arabic Round", size: 21))
             
             // الزر الثاني
-            Button("٣ أشهر") {
-                print("٣أشهر")
+            Button("٦٠ يوم") {
+                print("٦٠ يوم")
             }
             .padding()
             .frame(width: 263)
@@ -41,10 +44,11 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -60)
+            .font(.custom("SF Arabic Round", size: 21))
             
             //الزر الثالث
-            Button("٦ أشهر") {
-                print("٦ أشهر")
+            Button("٩٠ يوم") {
+                print("٦٠ يوم")
             }
             .padding()
             .frame(width: 263)
@@ -52,6 +56,8 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, 110)
+            .font(.custom("SF Arabic Round", size: 21))
+            
             // الشهم الاول
             Button{ } label: {
                     Image(systemName: "arrow.backward") }
