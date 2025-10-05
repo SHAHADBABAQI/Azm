@@ -12,13 +12,11 @@ struct FirstView: View {
     ]
     
     @State private var currentTextIndex = 0
-    // تم تصحيح خطأ الترميز هنا (الفاصلة)
     let timer = Timer.publish(every: 7.0, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
             
-            // الخلفية: تم تصحيحها لملء الشاشة بالكامل
             Image("Image 13")
                 .resizable()
                 .scaledToFill()
@@ -32,14 +30,13 @@ struct FirstView: View {
                         .padding(.leading, 170)
 
                     VStack {
-                        // النص الخاص بالحوار المتغير
                         Text(desertDialogue[currentTextIndex])
                             .multilineTextAlignment(.center)
                             .lineLimit(2)
                             .foregroundStyle(.black)
                             .font(.system(size: 16, weight: .bold, design: .default))
                             .padding(.horizontal, 60)
-                            .padding(.top, 300) // تعديل البادينغ ليتناسب مع العنوان الجديد
+                            .padding(.top, 300)
                             .transition(.opacity)
                         
                         Spacer()
@@ -50,11 +47,11 @@ struct FirstView: View {
                     } label: {
                         ZStack {
                             Circle()
-                                .fill(.yellow) // ⚠️ استخدم لونك (.cer)
+                                .fill(.yellow)
                                 .frame(width: 44, height: 44)
                             
                             Image(systemName: "arrow.backward")
-                                .foregroundColor(.black) // ⚠️ استخدم لونك (.greesh)
+                                .foregroundColor(.black)
                                 .font(.system(size: 20))
                         }
                     }
