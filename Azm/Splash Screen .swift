@@ -7,12 +7,96 @@
 
 import SwiftUI
 
-struct Splash_Screen_: View {
+struct SplashView: View {
+    @State private var circleScale: CGFloat = 0.1
+    @State private var moveUpRight = false
+    @State private var showText = false
+    @State private var endSplash = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            
+            Color.white.ignoresSafeArea()
+            Image("Image 10")
+            VStack {
+                Spacer()
+                
+                ZStack {
+                    // الدائرة
+                    Circle()
+                        .fill(Color(red: 0.98, green: 0.82, blue: 0.44)) // أصفر
+                        .scaleEffect(circleScale)
+                        .frame(width: 200, height: 200)
+                        .offset(
+                            x: moveUpRight ? 100 : 0,
+                            y: moveUpRight ? -150 : 0
+                        )
+                    
+                    // الجمل والنص
+                    VStack {
+                        Image("Image 16")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 120, height: 120)
+                        
+                        if showText {
+                            Text("عزم")
+                                .font(.system(size: 36, weight: .bold))
+                                .foregroundColor(.black)
+                                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                        }
+                    }
+                    .offset(
+                        x: moveUpRight ? 100 : 0,
+                        y: moveUpRight ? -150 : 0
+                    )
+                }
+                
+                Spacer()
+            }
+        }
+        .onAppear {
+            animateSplash()
+        }
+        .fullScreenCover(isPresented: $endSplash) {
+            // ضع الصفحة التالية هنا
+        }
     }
-}
+    
+    func animateSplash() {
+        // تكبير أولي للدائرة
+        withAnimation(.easeInOut(duration: 1.2)) {
+            circleScale = 6.0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+            // تصغير الدائرة قليلاً قبل ظهور النص
+            withAnimation(.easeInOut(duration: 1.0)) {
+                circleScale = 1.3
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                // ظهور النص
+                withAnimation(.easeIn(duration: 0.8)) {
+                    showText = true
+                }
+            }
+            
+            // المرحلة الأخيرة: الدائرة والجمل تتحرك لليمين وفوق وتصغر أكثر
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                withAnimation(.easeInOut(duration: 1.2)) {
+                    moveUpRight = true
+                    circleScale = 0.1 // تصغير الدائرة في النهاية
+                }
+            }
+            
+            // الانتقال للصفحة التالية
+                }
+            }
+        }
 
-#Preview {
-    Splash_Screen_()
+struct SplashView_Previews: PreviewProvider {
+    static var previews: some View {
+        SplashView()
+    }
 }
