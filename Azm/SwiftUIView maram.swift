@@ -32,7 +32,6 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -150)
-            .font(.custom("SF Arabic Round", size: 21))
             
             // الزر الثاني
             Button("٦٠ يوم") {
@@ -44,7 +43,6 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -60)
-            .font(.custom("SF Arabic Round", size: 21))
             
             //الزر الثالث
             Button("٩٠ يوم") {
@@ -56,9 +54,9 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, 110)
-            .font(.custom("SF Arabic Round", size: 21))
+    
             
-            // الشهم الاول
+            // السهم الاول
             Button{ } label: {
                     Image(systemName: "arrow.backward") }
             .padding()
