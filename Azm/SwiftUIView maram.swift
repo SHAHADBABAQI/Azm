@@ -11,7 +11,7 @@ struct ContentView2: View {
     var body: some View {
         ZStack {
             //النص حق اللغة
-            Image("Image 1 m")
+            Image("Image 13")
                 .ignoresSafeArea()
             Text("اختر المدة")
                 .font(.system(size: 25, weight: .bold, design: .default))
