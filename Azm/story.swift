@@ -26,18 +26,6 @@ struct FirstView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .trailing, spacing: 0) {
-                
-                // ⬅️ النص المتحرك: (يستقر في هذا الموضع كعنوان)
-                // هذا هو الاستقبال الوحيد للنص، مما يحل مشكلة التكرار
-              //  Text("اهلين أنا عزم …")
-              //      .matchedGeometryEffect(id: "MovingText", in: namespace)
-             //       .fontWeight(.bold)
-              //      .font(.title)
-           //         .foregroundColor(.black)
-           //         .padding(.top, 50)
-           //         .padding(.trailing, 20)
-            //
-                // باقي المحتوى الرئيسي
                 ZStack {
                     Image("Image 14")
                         .padding(.bottom, 470)
