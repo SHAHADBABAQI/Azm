@@ -9,7 +9,7 @@ import SwiftUI
 
 struct habitview: View {
     // ✅ استبدلنا @State بـ @ObservedObject
-    @ObservedObject var viewModel: HabitsViewModel
+    @StateObject var viewModel: HabitsViewModel = .init()
     
     let allHabits = ["شرب الماء", "الاستيقاظ مبكراً", "الرياضة لمدة نصف ساعة"]
     @State private var showTextField = false

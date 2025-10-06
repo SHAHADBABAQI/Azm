@@ -12,6 +12,8 @@ struct ContentView2: View {
     @State private var selectedDuration: Int = 30 // default
     @State private var navigateNext = false
     
+
+    
     var body: some View {
         NavigationStack {
             ZStack {
