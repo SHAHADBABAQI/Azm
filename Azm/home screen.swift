@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @State private var progresspress = false
     @State private var habits: [Habit] = [
         Habit(title: "شرب الماء"),
         Habit(title: "الاستيقاظ مبكرًا"),
@@ -68,9 +69,13 @@ struct HomeScreen: View {
                     print("تم الضغط على تتبع عزم")
                 } label: {
                     HStack(spacing: 12) {
-                        Text("تتبع عزم")
-                            .font(.title2)
-                            .foregroundColor(.black)
+                        Button("تتبع عزم "){
+                            progresspress.toggle()
+                        }
+                        .font(.system(size: 24, weight: .bold))                            .foregroundColor(.black)
+                            .sheet(isPresented: $progresspress) {
+                                ContentView()
+                                        }
 
                         Image("Image 16")
                             .resizable()
