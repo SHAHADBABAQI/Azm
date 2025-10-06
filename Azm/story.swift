@@ -1,0 +1,77 @@
+import SwiftUI
+
+struct FirstView: View {
+    let namespace: Namespace.ID
+    
+    let desertDialogue: [String] = [
+        "انا عزم صديقك الوحيد في هذي الصحراء ",
+        "انا ضايع و تعبان من الحر والعطش احتاج تساعدني اطلع من هالصحراء",
+        "متحمس اشوفك وعشان نتقابل يا صديقي تحتاج تنجز المهام",
+        "وكل مهمه تنجزها هي خطوه عشان اكون قريب لك",
+        "مبسوط انك معي يالله نبدا الرحله"
+    ]
+    
+    @State private var currentTextIndex = 0
+    let timer = Timer.publish(every: 7.0, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        ZStack {
+            
+            Image("Image 13")
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(alignment: .trailing, spacing: 0) {
+                ZStack {
+                    Image("Image 14")
+                        .padding(.bottom, 470)
+                        .padding(.leading, 170)
+
+                    VStack {
+                        Text(desertDialogue[currentTextIndex])
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+                            .foregroundStyle(.black)
+                            .font(.system(size: 16, weight: .bold, design: .default))
+                            .padding(.horizontal, 60)
+                            .padding(.top, 300)
+                            .transition(.opacity)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 100)
+
+                    Button {
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(.yellow)
+                                .frame(width: 44, height: 44)
+                            
+                            Image(systemName: "arrow.backward")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                    }
+                    .offset(x: -150, y: 350)
+                }
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+        }
+        
+        .onReceive(timer) { _ in
+            withAnimation(.easeInOut(duration: 1.0)) {
+                currentTextIndex = (currentTextIndex + 1) % desertDialogue.count
+            }
+        }
+        .toolbar(.hidden, for: .navigationBar)
+    }
+}
+
+#Preview {
+    @Previewable @Namespace var previewNamespace
+    return FirstView(namespace: previewNamespace)
+}
