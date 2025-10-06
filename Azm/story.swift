@@ -18,7 +18,7 @@ struct FirstView: View {
         ZStack {
             
             Image("Image 13")
-                .resizable()
+//                .resizable()
                 .scaledToFill()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .edgesIgnoringSafeArea(.all)
