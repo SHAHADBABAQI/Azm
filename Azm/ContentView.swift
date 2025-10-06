@@ -21,11 +21,14 @@ struct ContentView: View {
     }
 
     var body: some View {
+
         ZStack {
+    
             Image("Image 12")
                 .ignoresSafeArea()
 
             VStack(spacing: 40) {
+               
                 Text("\(Int(completedDays)) / \(Int(challengeDays)) يوم")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.black)
@@ -61,8 +64,24 @@ struct ContentView: View {
                             }
                     }
                     .frame(width: 200, height: 200)
+                    
                 }
             }
+            VStack {
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    dismiss()
+                                }) {
+                                    Text("إغلاق")
+                                        .font(.system(size: 18, weight: .bold))
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.top, 150)
+                                .padding(.trailing, 30)
+                            }
+                            Spacer()
+                        }
         }
         .onAppear {
             checkForDailyUpdate()

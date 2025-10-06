@@ -8,93 +8,92 @@
 import SwiftUI
 
 struct ContentView2: View {
-    var body: some View {
-        ZStack {
-            //النص حق اللغة
-            Image("Image 13")
-                .ignoresSafeArea()
-            Text("اختر المدة")
-                .font(.system(size: 25, weight: .bold, design: .default))
-                .foregroundColor(.black)
-                .bold()
-                .font(.title)
-                .padding(.top, -300)
-                .font(.custom("SF Arabic Round", size: 36))
-
-            
-            //الزر الاول حق الشهر
-            Button("٣٠ يوم") {
-                print("٣٠ يوم")
-            }
-            .padding()
-            .frame(width: 263)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .foregroundColor(.black)
-            .padding(.top, -150)
-            .bold()
-            
-            // الزر الثاني
-            Button("٦٠ يوم") {
-                print("٦٠ يوم")
-            }
-            .padding()
-            .frame(width: 263)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .foregroundColor(.black)
-            .padding(.top, -60)
-            .bold()
-            
-            //الزر الثالث
-            Button("٩٠ يوم") {
-                print("٦٠ يوم")
-            }
-            .padding()
-            .frame(width: 263)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .foregroundColor(.black)
-            .padding(.top, 110)
-            .bold()
+    @AppStorage("challengeDays") var challengeDays: Int = 30
+    @State private var selectedDuration: Int = 30 // default
+    @State private var navigateNext = false
     
-            
-            // السهم الاول
-            Button{ } label: {
-                    Image(systemName: "arrow.backward") }
-            .padding()
-            .background(Color(.white))
-            .foregroundStyle(.black)
-            .clipShape(Capsule())
-            .font(.system(size: 20))
-            .foregroundColor(.white)
-            .offset(y: 350)
-            .offset(x: -150)
-            
-            //السهم الثاني
-            Button{ } label: {
-                Image(systemName: "arrow.forward") }
-            .padding()
-            .background(Color(.white))
-            .foregroundStyle(.black)
-            .clipShape(Capsule())
-            .font(.system(size: 20))
-            .foregroundColor(.white)
-            .offset(y: 350)
-            .offset(x: 150)
-            
-            
-            //صورة الجمل
-            Image("Image 2 m")
-                .padding(.leading, 307)
-                .padding(.top,420)
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Image("Image 17")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Spacer().frame(height: 170)
+                    
+                    Text("اختر المدة")
+                        .font(.system(size: 35, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Spacer().frame(height: 30)
+                    
+                    durationButton(title: "٣٠ يوم", duration: 30)
+                        .padding(.top, 50)
+                    durationButton(title: "٦٠ يوم", duration: 60)
+                        .padding(.top, 10)
+                    durationButton(title: "٩٠ يوم", duration: 90)
+                        .padding(.top, 9)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        // زر "عزم" (اليسار) ✅ يحفظ الأيام ثم ينتقل
+                        NavigationLink {
+                            azm()
+                        } label: {
+                            Image(systemName: "arrow.backward")
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.black)
+                                .clipShape(Capsule())
+                                .font(.system(size: 20))
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            challengeDays = selectedDuration
+                            navigateNext = true
+                        })
+                        
+                        Spacer()
+                        
+                        // زر "التالي" (اليمين) للتنقل فقط
+                        NavigationLink {
+                            habitview()
+                        } label: {
+                            Image(systemName: "arrow.forward")
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.black)
+                                .clipShape(Capsule())
+                                .font(.system(size: 20))
+                                .frame(height: 170)
+                        }
+                    }
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 20)
+                }
+                .padding()
             }
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                }
-                }
-
+        }
+    }
+    
+    @ViewBuilder
+    private func durationButton(title: String, duration: Int) -> some View {
+        Button {
+            selectedDuration = duration
+        } label: {
+            Text(title)
+                .frame(width: 263)
+                .padding()
+                .background(selectedDuration == duration ? Color.gray : Color(.systemGray6))
+                .cornerRadius(12)
+                .foregroundColor(.black)
+        }
+        .padding(.vertical, 5)
+    }
+}
 
 #Preview {
     ContentView2()
 }
-
