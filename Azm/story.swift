@@ -47,7 +47,7 @@ struct FirstView: View {
                         .padding()
                         
                         NavigationLink {
-                            //صفحة سديم
+                            habitview()
                         } label: {
                             ZStack {
                                 Circle()
