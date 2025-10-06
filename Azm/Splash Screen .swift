@@ -12,68 +12,66 @@ struct SplashView: View {
     @State private var moveUpRight = false
     @State private var showText = false
     @State private var showMountain = false
-    @State private var endSplash = false
+    @State private var showStory = false // ✅ بعد انتهاء السبلاش نعرض القصة
     
     var body: some View {
         ZStack {
-            
-            Color.white.ignoresSafeArea()
-            Image("Image 10") // خلفية أساسية
-            
-            // جبل في الأسفل
-            if showMountain {
-                Image("Image 15") // ضع صورة الجبل هنا
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 800) // ارتفاع الجبل
-                    .frame(maxHeight: .infinity, alignment: .bottom) // ثبت الجبل في الأسفل
-                    .transition(.opacity)
-                    .animation(.easeInOut(duration: 2.0), value: showMountain)
-            }
-            
-            VStack {
-                Spacer()
+            if showStory {
+                // صفحة القصة تظهر مباشرة بعد انتهاء السبلاش
+                FirstView()
+            } else {
+                // شاشة السبلاش
+                Color.white.ignoresSafeArea()
                 
-                ZStack {
-                    // الدائرة
-                    Circle()
-                        .fill(Color(red: 0.98, green: 0.82, blue: 0.44))
-                        .scaleEffect(circleScale)
-                        .frame(width: 200, height: 200)
+                Image("Image 10") // الخلفية
+                
+                if showMountain {
+                    Image("Image 15")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 758)
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .transition(.opacity)
+                        .animation(.easeInOut(duration: 2.0), value: showMountain)
+                }
+                
+                VStack {
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .fill(Color(red: 0.98, green: 0.82, blue: 0.44))
+                            .scaleEffect(circleScale)
+                            .frame(width: 200, height: 200)
+                            .offset(
+                                x: moveUpRight ? 100 : 0,
+                                y: moveUpRight ? -150 : 0
+                            )
+                        
+                        VStack {
+                            Image("Image 16")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120, height: 120)
+                            
+                            if showText {
+                                Text("عزم")
+                                    .font(.system(size: 36, weight: .bold))
+                                    .foregroundColor(.black)
+                                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+                            }
+                        }
                         .offset(
                             x: moveUpRight ? 100 : 0,
                             y: moveUpRight ? -150 : 0
                         )
-                    
-                    // الجمل والنص
-                    VStack {
-                        Image("Image 16")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 120, height: 120)
-                        
-                        if showText {
-                            Text("عزم")
-                                .font(.system(size: 36, weight: .bold))
-                                .foregroundColor(.black)
-                                .transition(.opacity.combined(with: .move(edge: .bottom)))
-                        }
                     }
-                    .offset(
-                        x: moveUpRight ? 100 : 0,
-                        y: moveUpRight ? -150 : 0
-                    )
+                    Spacer()
                 }
-                
-                Spacer()
+                .onAppear {
+                    animateSplash()
+                }
             }
-        }
-        .onAppear {
-            animateSplash()
-        }
-        .fullScreenCover(isPresented: $endSplash) {
-            // الصفحة التالية
         }
     }
     
@@ -101,7 +99,14 @@ struct SplashView: View {
                 withAnimation(.easeInOut(duration: 1.2)) {
                     moveUpRight = true
                     circleScale = 0.1
-                    showMountain = true // الجبل يظهر
+                    showMountain = true
+                }
+                
+                // بعد انتهاء الأنميشن، عرض القصة مباشرة
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    withAnimation(.easeInOut) {
+                        showStory = true
+                    }
                 }
             }
         }

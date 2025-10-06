@@ -20,7 +20,7 @@ struct FirstView: View {
             
             ZStack {
                 
-                Image("Image 13")
+                Image("Image 12")
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
