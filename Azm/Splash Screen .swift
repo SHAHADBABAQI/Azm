@@ -11,20 +11,34 @@ struct SplashView: View {
     @State private var circleScale: CGFloat = 0.1
     @State private var moveUpRight = false
     @State private var showText = false
+    @State private var showMountain = false
     @State private var endSplash = false
     
     var body: some View {
         ZStack {
             
             Color.white.ignoresSafeArea()
-            Image("Image 10")
+            Image("Image 10") // خلفية أساسية
+            
+            // جبل في الأسفل
+            if showMountain {
+                Image("Image 15") // ضع صورة الجبل هنا
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 800) // ارتفاع الجبل
+                    .frame(maxHeight: .infinity, alignment: .bottom) // ثبت الجبل في الأسفل
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 2.0), value: showMountain)
+            }
+            
             VStack {
                 Spacer()
                 
                 ZStack {
                     // الدائرة
                     Circle()
-                        .fill(Color(red: 0.98, green: 0.82, blue: 0.44)) // أصفر
+                        .fill(Color(red: 0.98, green: 0.82, blue: 0.44))
                         .scaleEffect(circleScale)
                         .frame(width: 200, height: 200)
                         .offset(
@@ -59,7 +73,7 @@ struct SplashView: View {
             animateSplash()
         }
         .fullScreenCover(isPresented: $endSplash) {
-            // ضع الصفحة التالية هنا
+            // الصفحة التالية
         }
     }
     
@@ -82,18 +96,17 @@ struct SplashView: View {
                 }
             }
             
-            // المرحلة الأخيرة: الدائرة والجمل تتحرك لليمين وفوق وتصغر أكثر
+            // المرحلة الأخيرة: الدائرة والجمل تتحرك للأعلى وتتصغر + ظهور الجبل
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation(.easeInOut(duration: 1.2)) {
                     moveUpRight = true
-                    circleScale = 0.1 // تصغير الدائرة في النهاية
-                }
-            }
-            
-            // الانتقال للصفحة التالية
+                    circleScale = 0.1
+                    showMountain = true // الجبل يظهر
                 }
             }
         }
+    }
+}
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
