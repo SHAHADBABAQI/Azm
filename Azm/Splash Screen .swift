@@ -52,7 +52,7 @@ struct SplashView: View {
                             Image("Image 16")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 120, height: 120)
+                                .frame(width: 140, height: 140)
                             
                             if showText {
                                 Text("عزم")

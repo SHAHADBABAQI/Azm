@@ -28,8 +28,8 @@ struct FirstView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     ZStack {
                         Image("Image 14")
-                            .padding(.bottom, 470)
-                            .padding(.leading, 170)
+                            .padding(.bottom, 290)
+                            .padding(.leading, 190)
                         
                         VStack {
                             Text(desertDialogue[currentTextIndex])
