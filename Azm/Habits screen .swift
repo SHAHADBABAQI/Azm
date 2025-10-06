@@ -1,16 +1,17 @@
 //
-//  Habits screen .swift
+//  Habits screen.swift
 //  Azm
 //
 //  Created by sadeemalsmiry on 13/04/1447 AH.
 //
 
-
 import SwiftUI
 
 struct habitview: View {
-    @State private var selectedHabits: [String] = []
-    let allHabits = ["شرب الماء", "الاستيقاظ مبكراً", "الرياضة لمدة نصف ساعة"];
+    // ✅ استبدلنا @State بـ @ObservedObject
+    @ObservedObject var viewModel: HabitsViewModel
+    
+    let allHabits = ["شرب الماء", "الاستيقاظ مبكراً", "الرياضة لمدة نصف ساعة"]
     @State private var showTextField = false
     @State private var newHabit = ""
 
@@ -29,6 +30,7 @@ struct habitview: View {
                     Text("اقتراحات")
                         .font(.system(size: 18, weight: .medium))
 
+                    // ✅ إضافة من الاقتراحات
                     ForEach(allHabits, id: \.self) { habit in
                         HStack {
                             Text(habit)
@@ -38,9 +40,7 @@ struct habitview: View {
                                 .cornerRadius(12)
 
                             Button {
-                                if !selectedHabits.contains(habit) {
-                                    selectedHabits.append(habit)
-                                }
+                                viewModel.addHabit(habit)
                             } label: {
                                 Image(systemName: "plus.circle")
                                     .font(.title2)
@@ -50,6 +50,7 @@ struct habitview: View {
                         .frame(height: 40)
                     }
 
+                    // ✅ زر إضافة عادة جديدة
                     Button {
                         showTextField = true
                     } label: {
@@ -64,6 +65,7 @@ struct habitview: View {
                         .font(.system(size: 16, weight: .medium))
                     }
 
+                    // ✅ مربع كتابة عادة جديدة
                     if showTextField {
                         HStack {
                             TextField("أكتب عادة جديدة", text: $newHabit)
@@ -73,8 +75,8 @@ struct habitview: View {
                                 .font(.system(size: 16))
 
                             Button {
-                                if !newHabit.isEmpty && !selectedHabits.contains(newHabit) {
-                                    selectedHabits.append(newHabit)
+                                if !newHabit.isEmpty {
+                                    viewModel.addHabit(newHabit)
                                     newHabit = ""
                                     showTextField = false
                                 }
@@ -95,9 +97,10 @@ struct habitview: View {
                     Text("العادات المختارة..")
                         .font(.system(size: 18, weight: .medium))
 
+                    // ✅ عرض العادات المضافة
                     ScrollView(.vertical, showsIndicators: true) {
                         VStack(spacing: 10) {
-                            ForEach(selectedHabits, id: \.self) { habit in
+                            ForEach(viewModel.selectedHabits, id: \.self) { habit in
                                 HStack {
                                     Text(habit)
                                         .frame(maxWidth: .infinity)
@@ -106,9 +109,7 @@ struct habitview: View {
                                         .cornerRadius(12)
 
                                     Button {
-                                        if let i = selectedHabits.firstIndex(of: habit) {
-                                            selectedHabits.remove(at: i)
-                                        }
+                                        viewModel.removeHabit(habit)
                                     } label: {
                                         Image(systemName: "trash")
                                             .foregroundColor(.red)
@@ -133,6 +134,5 @@ struct habitview: View {
 }
 
 #Preview {
-    habitview()
+    habitview(viewModel: HabitsViewModel())
 }
-

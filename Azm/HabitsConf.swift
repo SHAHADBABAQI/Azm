@@ -105,7 +105,7 @@ struct azm: View {
                             
                             
                             NavigationLink {
-                                ContentView2()
+                                HomeScreen()
                             }
                             
                             label:{
@@ -131,8 +131,6 @@ struct azm: View {
                             }
                             
                             label:{
-                                
-                                
                                 
                                 Image(systemName: "arrow.forward")
                                     .font(.system(size: 20))
