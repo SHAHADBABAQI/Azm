@@ -1,8 +1,8 @@
 //
-//  SwiftUIView maram.swift
+//  Untitled.swift
 //  Azm
 //
-//  Created by Maram Ibrahim  on 10/04/1447 AH.
+//  Created by Maram Ibrahim  on 13/04/1447 AH.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct ContentView2: View {
                 .ignoresSafeArea()
             Text("اختر المدة")
                 .font(.system(size: 25, weight: .bold, design: .default))
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .bold()
                 .font(.title)
                 .padding(.top, -300)
@@ -32,6 +32,7 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -150)
+            .bold()
             
             // الزر الثاني
             Button("٦٠ يوم") {
@@ -43,6 +44,7 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, -60)
+            .bold()
             
             //الزر الثالث
             Button("٩٠ يوم") {
@@ -54,6 +56,7 @@ struct ContentView2: View {
             .cornerRadius(12)
             .foregroundColor(.black)
             .padding(.top, 110)
+            .bold()
     
             
             // السهم الاول
