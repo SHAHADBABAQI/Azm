@@ -115,7 +115,7 @@ struct azm: View {
                                 Image(systemName: "arrow.backward")
                                     .font(.system(size: 20))
                                     .foregroundColor(.black)
-                                    .frame(width: 50, height: 50) // حجم الزر
+                                    .frame(width: 50, height:90) // حجم الزر
                                                 .background(Color.white)      // الخلفية البيضاء
                                                 .clipShape(Circle())          // يجعلها دائرية
                                                 .shadow(radius: 4)

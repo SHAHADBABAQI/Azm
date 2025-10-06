@@ -44,7 +44,7 @@ struct habitview: View {
                             } label: {
                                 Image(systemName: "plus.circle")
                                     .font(.title2)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.add)
                             }
                         }
                         .frame(height: 40)
@@ -59,7 +59,7 @@ struct habitview: View {
                             Image(systemName: "plus")
                         }
                         .padding(8)
-                        .background(Color.blue.opacity(0.7))
+                        .background(Color.add.opacity(0.7))
                         .foregroundColor(.white)
                         .cornerRadius(12)
                         .font(.system(size: 16, weight: .medium))
@@ -85,7 +85,7 @@ struct habitview: View {
                                     .font(.title2)
                                     .foregroundColor(.white)
                                     .padding(8)
-                                    .background(Color.green.opacity(0.7))
+                                    .background(Color.check.opacity(0.7))
                                     .cornerRadius(12)
                             }
                         }
