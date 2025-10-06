@@ -12,12 +12,11 @@ struct SplashView: View {
     @State private var moveUpRight = false
     @State private var showText = false
     @State private var showMountain = false
-    @State private var showStory = false // ✅ بعد انتهاء السبلاش نعرض القصة
-    
+    @State private var showStory = false
+        
     var body: some View {
         ZStack {
             if showStory {
-                // صفحة القصة تظهر مباشرة بعد انتهاء السبلاش
                 FirstView()
             } else {
                 // شاشة السبلاش
@@ -76,25 +75,24 @@ struct SplashView: View {
     }
     
     func animateSplash() {
-        // تكبير أولي للدائرة
+        
         withAnimation(.easeInOut(duration: 1.2)) {
             circleScale = 6.0
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            // تصغير الدائرة قليلاً قبل ظهور النص
             withAnimation(.easeInOut(duration: 1.0)) {
                 circleScale = 1.3
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                // ظهور النص
+                
                 withAnimation(.easeIn(duration: 0.8)) {
                     showText = true
                 }
             }
             
-            // المرحلة الأخيرة: الدائرة والجمل تتحرك للأعلى وتتصغر + ظهور الجبل
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation(.easeInOut(duration: 1.2)) {
                     moveUpRight = true
@@ -102,7 +100,7 @@ struct SplashView: View {
                     showMountain = true
                 }
                 
-                // بعد انتهاء الأنميشن، عرض القصة مباشرة
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                     withAnimation(.easeInOut) {
                         showStory = true

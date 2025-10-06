@@ -77,7 +77,7 @@ struct ContentView2: View {
         }
     }
     
-    // دالة الزر بنفس تنسيق azm.swift
+    
     @ViewBuilder
     private func durationButton(title: String, duration: Int) -> some View {
         Button {
