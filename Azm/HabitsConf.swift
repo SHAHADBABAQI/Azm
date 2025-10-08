@@ -109,9 +109,7 @@ struct azm: View {
                             }
                             
                             label:{
-                                
-                                
-                                
+                               
                                 Image(systemName: "arrow.backward")
                                     .font(.system(size: 20))
                                     .foregroundColor(.black)

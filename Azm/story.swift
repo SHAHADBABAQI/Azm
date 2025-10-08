@@ -12,7 +12,7 @@ struct FirstView: View {
     ]
     
     @State private var currentTextIndex = 0
-    let timer = Timer.publish(every: 7.0, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationStack {
